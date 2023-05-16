@@ -1,11 +1,20 @@
+import { useState } from 'react';
 import SrchbarStyle from './Searchbar.module.css';
-import { IProps } from '../../types/interfaces';
 import { useSearchParams } from 'react-router-dom';
-useSearchParams;
-function Searchbar({ onSubmitForm }: IProps) {
+
+function Searchbar() {
+  const [_, setSearchParams] = useSearchParams();
+  const [inputValue, setInputValue] = useState<string>();
+
+  const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const queryValueEvent = event.target.value;
+    setInputValue(queryValueEvent);
+  };
+
   const onSubmitSearchForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmitForm(event.currentTarget.inputValue.value);
+    const queryValueEvent = event.currentTarget.inputValue.value;
+    queryValueEvent ? setSearchParams({ query: queryValueEvent }) : setSearchParams({});
   };
 
   return (
@@ -19,6 +28,8 @@ function Searchbar({ onSubmitForm }: IProps) {
         autoComplete='off'
         placeholder='Search movie'
         name='inputValue'
+        onChange={inputChange}
+        value={inputValue}
       />
     </form>
   );

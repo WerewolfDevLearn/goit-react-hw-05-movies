@@ -17,8 +17,6 @@ function MovieCasts() {
     setLoading(true);
     try {
       const casts = await api.fetchMovieCredits(params.movieId!);
-      console.log('casts: ', casts);
-
       setCasts([...casts]);
     } catch (error: any) {
       setError(error);
@@ -30,7 +28,7 @@ function MovieCasts() {
   useEffect(() => {
     getCasts();
   }, [getCasts]);
-  console.log(casts);
+
   return (
     <>
       <h3>Casts</h3>

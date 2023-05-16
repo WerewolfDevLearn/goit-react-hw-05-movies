@@ -6,16 +6,16 @@ axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 
 const fetchPopMovies = async () => {
   const response = await axios.get(`/trending/movie/day?api_key=${apiKey}`);
-  const filteredData = filter.datFilter(response.data);
-  return filteredData;
+  const filteredPopMoivies = filter.datFilter(response.data);
+  return filteredPopMoivies;
 };
 
 const fetchMovieByKeyword = async (keyword: string) => {
   const response = await axios.get(
     `/search/movie?api_key=${apiKey}&query=${keyword}&language=en-US&page=1&include_adult=false`,
   );
-  const filteredData = filter.datFilter(response.data);
-  return filteredData;
+  const filteredQueryMovies = filter.datFilter(response.data);
+  return filteredQueryMovies;
 };
 
 const fetchMovieDetails = async (movieId: string) => {
@@ -34,8 +34,8 @@ const fetchMovieReviews = async (movieId: string) => {
   const response = await axios.get(
     `/movie/${movieId}/reviews?api_key=${apiKey}&language=en-US&page=1`,
   );
-
-  return response;
+  const filteredMovieReviews = filter.ReviewDataFilter(response.data);
+  return filteredMovieReviews;
 };
 const moviesAPI = {
   fetchPopMovies,

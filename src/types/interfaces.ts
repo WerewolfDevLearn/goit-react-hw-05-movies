@@ -19,27 +19,8 @@ export interface IResponsMovies {
   total_pages: number;
   total_results: number;
 }
-export interface IMovie {
-  id: number;
-  adult: boolean;
-  release_date: string;
-  poster_path: string;
-  original_title: string;
-  genres: string[];
-}
 export interface IMovieListProps {
   movieArr: IMovie[];
-}
-export interface IMovieListItem {
-  movie: IMovie;
-  // finalUrl: {
-  //   from: {
-  //     hash: string;
-  //     key: string;
-  //     pathname: string;
-  //     search: string;
-  //     state: any;
-  //   };
 }
 export interface IMovieDetailsResp {
   adult: boolean;
@@ -91,6 +72,14 @@ export interface IMovieDetailsResp {
   vote_average: string;
   vote_count: number;
 }
+export interface IMovie {
+  id: number;
+  adult: boolean;
+  release_date: string;
+  poster_path: string;
+  original_title: string;
+  genres: string[];
+}
 export interface ICastResp {
   id: number;
   cast: {
@@ -121,37 +110,6 @@ export interface ICastResp {
     job: string;
   }[];
 }
-export interface IMovieDetails {
-  genres: string[];
-  overview: string | null;
-  popularity: number;
-  poster_path: string;
-  title: string;
-}
-export interface ICast {
-  id: number;
-  profile_path: string;
-  name: string;
-}
-export interface ICastProp {
-  cast: ICast;
-}
-export interface IParams {
-  [key: string]: string;
-}
-export interface IError {
-  status_message: string;
-  success?: boolean;
-  status_code?: number;
-}
-export interface IdatFilter {
-  data: IResponsMovies;
-  headers: object;
-  status: number;
-  statusText: string;
-  config: object;
-  request: object;
-}
 export interface IReviewsResp {
   id: number;
   page: number;
@@ -171,9 +129,57 @@ export interface IReviewsResp {
   total_pages: number;
   total_results: number;
 }
+export interface IMovieListItem {
+  movie: IMovie;
+  // finalUrl: {
+  //   from: {
+  //     hash: string;
+  //     key: string;
+  //     pathname: string;
+  //     search: string;
+  //     state: any;
+  //   };
+}
+export interface IMovieDetails {
+  genres: string[];
+  overview: string | null;
+  popularity: number;
+  poster_path: string;
+  title: string;
+}
+export interface ICast {
+  id: number;
+  profile_path: string;
+  name: string;
+}
+export interface ICastProp {
+  cast: ICast;
+}
+export interface IReviews {
+  id: string;
+  author: string;
+  content: string;
+}
+export interface IParams {
+  [key: string]: string;
+}
+export interface IError {
+  status_message: string;
+  success?: boolean;
+  status_code?: number;
+}
+export interface IdatFilter {
+  data: IResponsMovies;
+  headers: object;
+  status: number;
+  statusText: string;
+  config: object;
+  request: object;
+}
 export interface IReviewsProps {
-  review: { author: string; content: string };
+  review: IReviews;
 }
 export interface IProps {
   onSubmitForm(values: string): void;
+  query: string;
 }

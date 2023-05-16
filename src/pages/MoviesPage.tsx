@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import Error from '../сomponents/Error/Error';
 import Moiveslist from '../сomponents/MovieGallery/MoviesList';
@@ -13,9 +13,8 @@ function MoviesPage() {
   const [movies, setMovies] = useState<IMovie[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const navigate = useNavigate();
-  const location = useLocation();
-
+  // const navigate = useNavigate();
+  // const location = useLocation();
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
@@ -37,17 +36,9 @@ function MoviesPage() {
     }
   }, [getMovies, query]);
 
-  const handleSubmitQuery = (query: string) => {
-    console.log(location);
-    navigate({
-      pathname: location.pathname,
-      search: `query=${query}`,
-    });
-  };
-
   return (
     <>
-      <Searchbar onSubmitForm={handleSubmitQuery} />
+      <Searchbar />
       {error && <Error error={error} />}
       {loading && <Loader />}
       {movies && <Moiveslist movieArr={movies} />}

@@ -5,6 +5,8 @@ import {
   IMovieDetails,
   ICastResp,
   ICast,
+  IReviewsResp,
+  IReviews,
 } from '../types/interfaces';
 import getGenres from './getGenres';
 import getPosterPath from './getPosterPath';
@@ -35,8 +37,6 @@ function movieDataFilter(data: IMovieDetailsResp): IMovieDetails {
 }
 
 function castDataFilter(data: ICastResp): ICast[] {
-  console.log('data: ', data);
-
   const filteredData = data.cast.map((cast) => {
     return {
       id: cast.cast_id,
@@ -46,5 +46,15 @@ function castDataFilter(data: ICastResp): ICast[] {
   });
   return filteredData;
 }
+function ReviewDataFilter(data: IReviewsResp): IReviews[] {
+  const filteredData = data.results.map((review) => {
+    return {
+      id: review.id,
+      author: review.author,
+      content: review.content,
+    };
+  });
+  return filteredData;
+}
 
-export default { datFilter, movieDataFilter, castDataFilter };
+export default { datFilter, movieDataFilter, castDataFilter, ReviewDataFilter };
