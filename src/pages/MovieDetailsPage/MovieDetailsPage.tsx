@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, Suspense } from 'react';
+import { useState, useEffect, useCallback, Suspense, useRef } from 'react';
 import { Outlet, useLocation, useParams, useNavigate } from 'react-router-dom';
 import MovieDetails from '../../сomponents/MovieDetails/MovieDetails';
 import AdditionalDetails from '../../сomponents/MovieDetails/AdditionDetailsList/AdditionDetailsList';
@@ -7,15 +7,20 @@ import Error from '../../сomponents/Error/Error';
 import MDPStyle from './MovieDetailsPage.module.css';
 import api from '../../service/api';
 import { IParams, IMovieDetails } from '../../types/interfaces';
+import routes from '../../routes';
 
 function MovieDetailsPage() {
   const [movie, setMovie] = useState<IMovieDetails>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
   const location = useLocation();
+
+  console.log('location: ', location);
   const params = useParams<IParams>();
+  console.log(location);
+  const backLink = useRef(location.state?.from ?? routes.movies);
+  console.log('backLink: ', backLink);
 
   const getMovieDetails = useCallback(async (movieId: string) => {
     setLoading(true);
@@ -32,10 +37,10 @@ function MovieDetailsPage() {
   useEffect(() => {
     getMovieDetails(params.movieId!);
   }, [getMovieDetails, params.movieId]);
-  // history.push(location?.state?.from ?? routes.home);
+
   const handlerGoBack = () => {
-    console.log('location', location.state.from);
-    navigate(location.state.from);
+    console.log(backLink.current);
+    navigate(backLink.current);
   };
 
   return (

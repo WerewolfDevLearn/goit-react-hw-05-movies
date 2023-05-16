@@ -12,8 +12,8 @@ function MovieListItem({ movie }: IMovieListItem) {
     <li>
       <Link
         to={`${routes.movies}/${movie.id}`}
-        className={MLIStl.mListLink}
         state={{ from: location }}
+        className={MLIStl.mListLink}
       >
         <div className={MLIStl.movieCard}>
           <div className={MLIStl.posterContainer}>
