@@ -26,7 +26,8 @@ const fetchMovieDetails = async (movieId: string) => {
 
 const fetchMovieCredits = async (movieId: string) => {
   const response = await axios.get(`/movie/${movieId}/credits?api_key=${apiKey}&language=en-US`);
-  return response;
+  const filteredMovieCasts = filter.castDataFilter(response.data);
+  return filteredMovieCasts;
 };
 
 const fetchMovieReviews = async (movieId: string) => {

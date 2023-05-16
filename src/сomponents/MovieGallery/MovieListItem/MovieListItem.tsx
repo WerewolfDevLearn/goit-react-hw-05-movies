@@ -17,7 +17,7 @@ function MovieListItem({ movie }: IMovieListItem) {
       >
         <div className={MLIStl.movieCard}>
           <div className={MLIStl.posterContainer}>
-            <img src={`${poster_path}`} alt={original_title} />
+            <img src={poster_path} alt={original_title} />
           </div>
           <p className={MLIStl.movieName}>{original_title}</p>
         </div>

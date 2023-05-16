@@ -35,8 +35,11 @@ function movieDataFilter(data: IMovieDetailsResp): IMovieDetails {
 }
 
 function castDataFilter(data: ICastResp): ICast[] {
+  console.log('data: ', data);
+
   const filteredData = data.cast.map((cast) => {
     return {
+      id: cast.cast_id,
       name: cast.name,
       profile_path: getAvatarPath(cast.profile_path),
     };

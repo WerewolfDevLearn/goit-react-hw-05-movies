@@ -23,7 +23,7 @@ export interface IMovie {
   id: number;
   adult: boolean;
   release_date: string;
-  poster_path: string | null;
+  poster_path: string;
   original_title: string;
   genres: string[];
 }
@@ -125,18 +125,16 @@ export interface IMovieDetails {
   genres: string[];
   overview: string | null;
   popularity: number;
-  poster_path: string | null;
+  poster_path: string;
   title: string;
 }
 export interface ICast {
-  profile_path: string | null;
+  id: number;
+  profile_path: string;
   name: string;
 }
 export interface ICastProp {
-  cast: {
-    profile_path: string;
-    name: string;
-  };
+  cast: ICast;
 }
 export interface IParams {
   [key: string]: string;

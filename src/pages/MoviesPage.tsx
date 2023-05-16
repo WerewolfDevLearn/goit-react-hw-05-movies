@@ -15,9 +15,8 @@ function MoviesPage() {
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
   const location = useLocation();
-  console.log('location: ', location);
 
-  const [searchParams, setSearchParam] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
   const getMovies = useCallback(async (query: string) => {
@@ -39,6 +38,7 @@ function MoviesPage() {
   }, [getMovies, query]);
 
   const handleSubmitQuery = (query: string) => {
+    console.log(location);
     navigate({
       pathname: location.pathname,
       search: `query=${query}`,
