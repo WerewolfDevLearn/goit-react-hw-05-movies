@@ -10,10 +10,13 @@ const fetchPopMovies = async () => {
   return filteredPopMoivies;
 };
 
-const fetchMovieByKeyword = async (keyword: string) => {
+const fetchMovieByKeyword = async (keyword: string, page: number) => {
   const response = await axios.get(
-    `/search/movie?api_key=${apiKey}&query=${keyword}&language=en-US&page=1&include_adult=false`,
+    `/search/movie?api_key=${apiKey}&query=${keyword}&language=en-US&page=${page}&include_adult=false`,
   );
+  if (response.data.results.length === 0) {
+    throw new Error('Sorry. There is no photos on your request.');
+  }
   const filteredQueryMovies = filter.datFilter(response.data);
   return filteredQueryMovies;
 };

@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 
 function Searchbar() {
   const [_, setSearchParams] = useSearchParams();
-  const [inputValue, setInputValue] = useState<string>();
+  const [inputValue, setInputValue] = useState<string>('');
 
   const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const queryValueEvent = event.target.value;

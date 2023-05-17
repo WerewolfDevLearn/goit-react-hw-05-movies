@@ -1,5 +1,4 @@
 import {
-  IMovie,
   IResponsMovies,
   IMovieDetailsResp,
   IMovieDetails,
@@ -7,12 +6,13 @@ import {
   ICast,
   IReviewsResp,
   IReviews,
+  IMovieFilterd,
 } from '../types/interfaces';
 import getGenres from './getGenres';
 import getPosterPath from './getPosterPath';
 import getAvatarPath from './getAvatarPath';
 
-function datFilter(data: IResponsMovies): IMovie[] {
+function datFilter(data: IResponsMovies): IMovieFilterd {
   const filteredData = data.results.map((result) => {
     return {
       id: result.id,
@@ -23,7 +23,13 @@ function datFilter(data: IResponsMovies): IMovie[] {
       genres: getGenres(result.genre_ids),
     };
   });
-  return filteredData;
+  const filterRespons = {
+    page: data.page,
+    results: filteredData,
+    total_pages: data.total_pages,
+    total_results: data.total_results,
+  };
+  return filterRespons;
 }
 
 function movieDataFilter(data: IMovieDetailsResp): IMovieDetails {

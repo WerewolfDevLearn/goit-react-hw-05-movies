@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import Error from '../сomponents/Error/Error';
-import Moiveslist from '../сomponents/MovieGallery/MoviesList';
 import Searchbar from '../сomponents/Searchbar/Searchbar';
+import Moiveslist from '../сomponents/MovieGallery/MoviesList';
+import Pagination from '../сomponents/Pagintion/Pagination';
+import Message from '../сomponents/Message/Message';
 import Loader from '../сomponents/Loader/Loader';
 import api from '../service/api';
 
@@ -12,36 +13,42 @@ import { IMovie } from '../types/interfaces';
 function MoviesPage() {
   const [movies, setMovies] = useState<IMovie[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
-  // const navigate = useNavigate();
-  // const location = useLocation();
+  const [message, setMessage] = useState('');
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
-  const getMovies = useCallback(async (query: string) => {
+  const getMovies = useCallback(async (query: string, page: number) => {
     setLoading(true);
     try {
-      const moviesByKeyword = await api.fetchMovieByKeyword(query);
-      setMovies([...moviesByKeyword]);
+      setMessage('');
+      const filteredData = await api.fetchMovieByKeyword(query, page);
+      setMovies([...filteredData.results]);
+      setTotalPages(filteredData.total_pages);
     } catch (error: any) {
-      setError(error);
+      setMessage(error.massage);
     } finally {
       setLoading(false);
     }
   }, []);
+  const setPagiPage = (page: number) => {
+    setPage(page);
+  };
 
   useEffect(() => {
     if (query) {
-      getMovies(query);
+      getMovies(query, page);
     }
-  }, [getMovies, query]);
+  }, [getMovies, query, page]);
 
   return (
     <>
       <Searchbar />
-      {error && <Error error={error} />}
+      {message && <Message message={message} />}
       {loading && <Loader />}
       {movies && <Moiveslist movieArr={movies} />}
+      {movies && <Pagination total_pages={totalPages} getPageNumber={setPagiPage} />}
     </>
   );
 }

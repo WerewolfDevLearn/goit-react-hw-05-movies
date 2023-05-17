@@ -3,6 +3,6 @@ export default {
   home: '/',
   movies: '/movies',
   movieDetails: '/movies/:movieId',
-  cast: 'casts',
+  casts: 'casts',
   reviews: 'reviews',
 };

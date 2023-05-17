@@ -80,6 +80,13 @@ export interface IMovie {
   original_title: string;
   genres: string[];
 }
+
+export interface IMovieFilterd {
+  results: IMovie[];
+  page: number;
+  total_pages: number;
+  total_results: number;
+}
 export interface ICastResp {
   id: number;
   cast: {
@@ -164,9 +171,11 @@ export interface IParams {
   [key: string]: string;
 }
 export interface IError {
-  status_message: string;
-  success?: boolean;
-  status_code?: number;
+  error: {
+    status_message: string;
+    success?: boolean;
+    status_code?: number;
+  };
 }
 export interface IdatFilter {
   data: IResponsMovies;
@@ -182,4 +191,8 @@ export interface IReviewsProps {
 export interface IProps {
   onSubmitForm(values: string): void;
   query: string;
+}
+export interface IPagination {
+  total_pages: number;
+  getPageNumber(page: number): void;
 }
