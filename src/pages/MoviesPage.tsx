@@ -14,7 +14,6 @@ function MoviesPage() {
   const [movies, setMovies] = useState<IMovie[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState('');
-  // const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
@@ -28,13 +27,13 @@ function MoviesPage() {
       setMovies([...filteredData.results]);
       setTotalPages(filteredData.total_pages);
     } catch (error: any) {
-      setMessage(error.massage);
+      // console.dir(error);
+      setMessage(error.message);
     } finally {
       setLoading(false);
     }
   }, []);
   const setPagiPage = (page: number) => {
-    // setPage(page);
     setSearchParams({ query, qpage: `${page}` });
   };
 
@@ -44,13 +43,16 @@ function MoviesPage() {
     }
   }, [getMovies, query, qpage]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => console.log(query), []);
+
   return (
     <>
       <Searchbar />
       {message && <Message message={message} />}
       {loading && <Loader />}
       {movies && <Moiveslist movieArr={movies} />}
-      {movies && (
+      {movies.length >= 20 && (
         <Pagination total_pages={totalPages} getPageNumber={setPagiPage} currentPage={qpage} />
       )}
     </>

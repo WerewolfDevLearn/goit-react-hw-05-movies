@@ -15,7 +15,7 @@ const fetchMovieByKeyword = async (keyword: string, page: number) => {
     `/search/movie?api_key=${apiKey}&query=${keyword}&language=en-US&page=${page}&include_adult=false`,
   );
   if (response.data.results.length === 0) {
-    throw new Error('Sorry. There is no photos on your request.');
+    throw new Error('Sorry. There is no moives on your request.');
   }
   const filteredQueryMovies = filter.datFilter(response.data);
   return filteredQueryMovies;
