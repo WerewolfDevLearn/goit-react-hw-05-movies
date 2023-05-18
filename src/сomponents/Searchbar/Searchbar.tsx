@@ -14,7 +14,7 @@ function Searchbar() {
   const onSubmitSearchForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const queryValueEvent = event.currentTarget.inputValue.value;
-    queryValueEvent ? setSearchParams({ query: queryValueEvent }) : setSearchParams({});
+    queryValueEvent ? setSearchParams({ query: queryValueEvent, qpage: '1' }) : setSearchParams({});
   };
 
   return (

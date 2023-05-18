@@ -14,10 +14,11 @@ function MoviesPage() {
   const [movies, setMovies] = useState<IMovie[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState('');
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
+  const qpage = searchParams.get('qpage') ?? '';
 
   const getMovies = useCallback(async (query: string, page: number) => {
     setLoading(true);
@@ -33,14 +34,15 @@ function MoviesPage() {
     }
   }, []);
   const setPagiPage = (page: number) => {
-    setPage(page);
+    // setPage(page);
+    setSearchParams({ query, qpage: `${page}` });
   };
 
   useEffect(() => {
     if (query) {
-      getMovies(query, page);
+      getMovies(query, Number(qpage));
     }
-  }, [getMovies, query, page]);
+  }, [getMovies, query, qpage]);
 
   return (
     <>
