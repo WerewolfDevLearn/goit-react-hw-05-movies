@@ -85,6 +85,11 @@ button:focus-visible {
   border-style: solid;
   border-radius: 4px;
   border-width: 1px;
-  padding: 5px 20px;
+  padding: 5px 10px;
   text-align: center;
+}
+
+.liactive {
+  color: #000000;
+  background-color: #bfbfbf;
 }

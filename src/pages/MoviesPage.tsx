@@ -50,7 +50,9 @@ function MoviesPage() {
       {message && <Message message={message} />}
       {loading && <Loader />}
       {movies && <Moiveslist movieArr={movies} />}
-      {movies && <Pagination total_pages={totalPages} getPageNumber={setPagiPage} />}
+      {movies && (
+        <Pagination total_pages={totalPages} getPageNumber={setPagiPage} currentPage={qpage} />
+      )}
     </>
   );
 }

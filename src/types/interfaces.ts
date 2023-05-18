@@ -195,4 +195,5 @@ export interface IProps {
 export interface IPagination {
   total_pages: number;
   getPageNumber(page: number): void;
+  currentPage: string;
 }

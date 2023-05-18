@@ -1,5 +1,5 @@
 import MovieCastsStyle from './MovieCats.module.css';
-
+import Loader from '../../Loader/Loader';
 import Message from '../../Message/Message';
 import Cast from '../Cast/Cast';
 import api from '../../../service/api';
@@ -9,17 +9,20 @@ import { ICast } from '../../../types/interfaces';
 
 function MovieCasts() {
   const [casts, setCasts] = useState<ICast[]>([]);
-
+  const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState('');
   const params = useParams();
 
   const getCasts = useCallback(async () => {
+    setLoading(true);
+    setMessage('');
     try {
-      setMessage('');
       const casts = await api.fetchMovieCredits(params.movieId!);
       setCasts([...casts]);
     } catch (error: any) {
       setMessage(error.massage);
+    } finally {
+      setLoading(false);
     }
   }, [params.movieId]);
 
@@ -30,7 +33,7 @@ function MovieCasts() {
   return (
     <>
       <h3>Casts</h3>
-
+      {loading && <Loader />}
       {message && <Message message={message} />}
       {casts.length > 0 ? (
         <>

@@ -12,8 +12,8 @@ function HomePage() {
 
   const getTrendingMovies = useCallback(async () => {
     setLoading(true);
+    setMessage('');
     try {
-      setMessage('');
       const filteredData = await api.fetchPopMovies();
       setTrendingMovies([...filteredData.results]);
     } catch (error: any) {
