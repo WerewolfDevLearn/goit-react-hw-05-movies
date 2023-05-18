@@ -25,7 +25,7 @@ function MovieDetailsPage() {
       const movie = await api.fetchMovieDetails(movieId);
       setMovie(movie);
     } catch (error: any) {
-      setMessage(error.massage);
+      setMessage(error.message);
     } finally {
       setLoading(false);
     }

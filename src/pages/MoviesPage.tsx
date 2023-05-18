@@ -27,7 +27,6 @@ function MoviesPage() {
       setMovies([...filteredData.results]);
       setTotalPages(filteredData.total_pages);
     } catch (error: any) {
-      // console.dir(error);
       setMessage(error.message);
     } finally {
       setLoading(false);

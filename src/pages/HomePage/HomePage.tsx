@@ -17,7 +17,7 @@ function HomePage() {
       const filteredData = await api.fetchPopMovies();
       setTrendingMovies([...filteredData.results]);
     } catch (error: any) {
-      setMessage(error.massage);
+      setMessage(error.message);
     } finally {
       setLoading(false);
     }

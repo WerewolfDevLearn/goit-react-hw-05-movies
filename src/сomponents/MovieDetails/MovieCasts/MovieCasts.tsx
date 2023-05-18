@@ -20,7 +20,7 @@ function MovieCasts() {
       const casts = await api.fetchMovieCredits(params.movieId!);
       setCasts([...casts]);
     } catch (error: any) {
-      setMessage(error.massage);
+      setMessage(error.message);
     } finally {
       setLoading(false);
     }

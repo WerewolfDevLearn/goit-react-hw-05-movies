@@ -20,7 +20,7 @@ function MovieReviews() {
       console.log('revews: ', revews);
       setReviews([...revews]);
     } catch (error: any) {
-      setMessage(error.massage);
+      setMessage(error.message);
     } finally {
       setLoading(false);
     }
