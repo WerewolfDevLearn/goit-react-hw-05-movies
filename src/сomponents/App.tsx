@@ -7,12 +7,9 @@ import Error from './Error/Error';
 import routes from '../routes';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
-
 const MoviesPage = lazy(() => import('../pages/MoviesPage'));
-
 const MovieDetailsPage = lazy(() => import('../pages/MovieDetailsPage/MovieDetailsPage'));
 const MovieCasts = lazy(() => import('../сomponents/MovieDetails/MovieCasts/MovieCasts'));
-
 const MovieReviews = lazy(() => import('../сomponents/MovieDetails/MovieReviews/MovieReviews'));
 
 const App = () => {
